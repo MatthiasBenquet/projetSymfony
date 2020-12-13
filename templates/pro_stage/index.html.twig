@@ -1,15 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'liste.html.twig' %}
 
 {% block title %}Accueil{% endblock %}
 
-{% block body %}
-<div>
-	<div id="tabStages">
-		
-	</div>
-	<div id="boutons">
-		<a href="entreprises"><button type="button">Filtrer par entreprise</button></a>
-		<a href="formations"><button type="button">Filtrer par formation</button></a>
-	</div>
+{% block h1 %}Liste de tous les stages{% endblock %}
+
+{% block liste %}
+	{# Affichage de la liste des formations #}
+{% endblock %}
+
+{% block boutons %}
+<div id="boutons">
+	<a href="entreprises"><button type="button">Filtrer par entreprise</button></a>
+	<a href="formations"><button type="button">Filtrer par formation</button></a>
 </div>
 {% endblock %}
+
+

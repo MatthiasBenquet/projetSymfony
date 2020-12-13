@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du stage{% endblock %}
+
+{% block body %}
+	<h1>Cette page affichera le descriptif du stage ayant pour identifiant {{ idStage }}</h1>
+	<div id="titre">
+		<h1>{% block intitule %}{% endblock %}</h1>
+		<h2>{% block entreprise %}{% endblock %}</h2>
+	</div>
+	<div>
+		<div id="infos">
+			{% block infos %}{% endblock %}
+		</div>
+		<div id="description">
+			{% block description %}{% endblock %}
+		</div>
+	</div>
+	<div id="accueil">
+		<a href="/"><button type="button">Accueil</button></a>
+	</div>
+{% endblock %}

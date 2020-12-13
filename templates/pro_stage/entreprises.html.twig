@@ -1,10 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'liste.html.twig' %}
 
 {% block title %}Entreprises{% endblock %}
 
-{% block body %}
-	<h1>Bienvenue</h1>
-	<div id="listeEntreprises">
-		
-	</div>
+{% block h1 %}Liste de toutes les entreprises{% endblock %}
+
+{% block liste %}
+	{# Affichage de la liste des entreprises #}
 {% endblock %}
+
+{% block boutons %}<a href="/"><button type="button">Accueil</button></a>{% endblock %}
