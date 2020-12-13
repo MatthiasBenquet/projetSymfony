@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h1>Cette page affichera le descriptif du stage ayant pour identifiant {{ id }}</h1>
-</body>
-</html>
+{% extends 'base.html.twig' %}
+{% block body %}
+	<h1>Cette page affichera le descriptif du stage ayant pour identifiant {{ idStage }}</h1>
+{% endblock %}
