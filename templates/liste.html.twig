@@ -2,8 +2,10 @@
 
 {% block body %}
 	<h1>{% block h1 %}{% endblock %}</h1>
-	<div>
-		{% block liste %}{% endblock %}
+
+	<div class="list-group">
+		{% block elements %}{% endblock %}
 	</div>
+
 	{% block boutons %}{% endblock %}
 {% endblock %}
