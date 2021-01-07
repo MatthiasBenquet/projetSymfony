@@ -104,8 +104,8 @@ class AppFixtures extends Fixture
 			$stage->setNom($faker->word());
 			$stage->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
 			$stage->setDateDebut(date($format = 'd-m-Y'));
-			$stage->setDuree(numberBetween($min = 20, $max = 1000));
-			$stage->setCompetencesRequises(sentence($nbWords = 4, $variableNbWords = true));
+			$stage->setDuree($faker->numberBetween($min = 20, $max = 1000));
+			$stage->setCompetencesRequises($faker->sentence($nbWords = 4, $variableNbWords = true));
 			$stage->setExperienceRequise($faker->word());
 			$stage->setEmail($faker->email());
 			$stage->setContact($faker->name());

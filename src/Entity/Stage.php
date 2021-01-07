@@ -104,12 +104,12 @@ class Stage
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeInterface
+    public function getDateDebut(): ?string
     {
         return $this->dateDebut;
     }
 
-    public function setDateDebut(\DateTimeInterface $dateDebut): self
+    public function setDateDebut(string $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
 
