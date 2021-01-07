@@ -10,17 +10,20 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+    	//création d'un générateur de données Faker
+    	$faker = \Faker\Factory::create('fr_FR');
+
     	//création de l'entité de test
-        $safran = new Entreprise();
+        $entreprise = new Entreprise();
 
         //ajout des attributs
-        $safran->setCode("0000000001");
-        $safran->setNom("Safran");
-        $safran->setDomaine("Aéronautique/Espace/Défense");
-        $safran->setAdresse("2 Bd du Général Martial Valin");
-        $safran->setUrlSiteWeb("www.safran-group.com/fr");
+       $entreprise->setCode("1");
+       $entreprise->setNom($faker->realText($maxNbChars = 30, $indexSize = 2));
+       $entreprise->setDomaine($faker->realText($maxNbChars = 30, $indexSize = 2));
+       $entreprise->setAdresse($faker->address());
+       $entreprise->setUrlSiteWeb($faker->url());
 
-        $manager->persist($safran);
+        $manager->persist($entreprise);
 
         $manager->flush();
     }
