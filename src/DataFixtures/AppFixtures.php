@@ -18,9 +18,10 @@ class AppFixtures extends Fixture
 
         //ajout des attributs
        $entreprise->setCode("1");
-       $entreprise->setNom($faker->realText($maxNbChars = 30, $indexSize = 2));
+       $entreprise->setNom($faker->realText($maxNbChars = 10, $indexSize = 2));
        $entreprise->setDomaine($faker->realText($maxNbChars = 30, $indexSize = 2));
        $entreprise->setAdresse($faker->address());
+       $entreprise->setTelephone($faker->phoneNumber());
        $entreprise->setUrlSiteWeb($faker->url());
 
         $manager->persist($entreprise);
