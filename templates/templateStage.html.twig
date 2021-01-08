@@ -9,17 +9,23 @@
 			{% block entrepriseStage %}{% endblock %}
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="col-md-6">
-			{% block coordonnees %}{% endblock %}
+			<div class="list-group">
+				<li class="list-group-item">{% block email %}{% endblock %}</li>
+				<li class="list-group-item">{% block Contact %}{% endblock %}</li>
+			</div>
 		</div>
+
 		<div class="col-md-6">
 			{% block description %}{% endblock %}
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="col-md-12">
-			<a href="/"><button type="button">Accueil</button></a>
+			<a class="btn btn-primary" href="/" role="button">Accueil</a>
 		</div>
 	</div>
 {% endblock %}
