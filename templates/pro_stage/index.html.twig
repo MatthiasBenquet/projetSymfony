@@ -6,15 +6,9 @@
 
 {% block elements %}
 	{# Affichage des stages à partir de la bdd #}
-	<li class="list-group-item">Stage 1</li>
-	<li class="list-group-item">Stage 2</li>
-	<li class="list-group-item">Stage 3</li>
-	<li class="list-group-item">Stage 4</li>
-	<li class="list-group-item">Stage 5</li>
-	<li class="list-group-item">Stage 6</li>
-	<li class="list-group-item">Stage 7</li>
-	<li class="list-group-item">Stage 8</li>
-	<li class="list-group-item">Stage 9</li>
+	{% for i in 1..9 %}
+		<a href="{{ '/stages/' ~ i }}"><li class="list-group-item">Stage {{i}}</li></a>
+	{% endfor %}
 {% endblock %}
 
 {% block boutons %}
