@@ -20,7 +20,7 @@ class Stage
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=60)
      */
     private $nom;
 
@@ -30,7 +30,7 @@ class Stage
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="date")
      */
     private $dateDebut;
 
@@ -104,12 +104,12 @@ class Stage
         return $this;
     }
 
-    public function getDateDebut(): ?string
+    public function getDateDebut(): ?\DateTimeInterface
     {
         return $this->dateDebut;
     }
 
-    public function setDateDebut(string $dateDebut): self
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
 

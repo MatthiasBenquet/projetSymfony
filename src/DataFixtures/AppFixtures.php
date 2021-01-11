@@ -78,7 +78,7 @@ class AppFixtures extends Fixture
 
 			//ajout des attributs
 			$entreprise->setNom($faker->company());
-			$entreprise->setDomaine($faker->word());
+			$entreprise->setDomaine($faker->jobTitle());
 			$entreprise->setAdresse($faker->address());
 			$entreprise->setTelephone($faker->phoneNumber());
 			$entreprise->setUrlSiteWeb($faker->url());
@@ -101,12 +101,12 @@ class AppFixtures extends Fixture
 			$stage = new Stage();
 
 			//ajout d'attributs
-			$stage->setNom($faker->word());
+			$stage->setNom($faker->regexify('(Développement |Maintenance |Conception )d\'un( logiciel\.|e application\.)'));
 			$stage->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
-			$stage->setDateDebut(date($format = 'd-m-Y'));
+			$stage->setDateDebut($faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now', $timeZone = 'Europe/Paris'));
 			$stage->setDuree($faker->numberBetween($min = 20, $max = 1000));
-			$stage->setCompetencesRequises($faker->sentence($nbWords = 4, $variableNbWords = true));
-			$stage->setExperienceRequise($faker->word());
+			$stage->setCompetencesRequises($faker->regexify('(PHP|C\+\+|JavaScript|Java|Symfony)'));
+			$stage->setExperienceRequise($faker->regexify('(Bac\+2|Bac\+3|Bac\+5|Niveau ingénieur)'));
 			$stage->setEmail($faker->email());
 			$stage->setContact($faker->name());
 
