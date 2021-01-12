@@ -4,16 +4,14 @@
 
 {% block h1 %}Liste de tous les stages{% endblock %}
 
+{% block boutons %}
+	<a class="btn btn-primary" href="entreprises" role="button">Liste des entreprises</a>
+	<a class="btn btn-primary" href="formations" role="button">Liste des formations</a>
+{% endblock %}
+
 {% block elements %}
 	{# Affichage des stages à partir de la bdd #}
-	{% for i in 1..9 %}
-		<a href="{{ '/stages/' ~ i }}"><li class="list-group-item">Stage {{i}}</li></a>
+	{% for stage in stages %}
+		<a href="{{ '/stages/' ~ stage.id }}"><li class="list-group-item">Stage {{stage.id}}</li></a>
 	{% endfor %}
 {% endblock %}
-
-{% block boutons %}
-	<a class="btn btn-primary" href="entreprises" role="button">Filtrer par entreprise</a>
-	<a class="btn btn-primary" href="formations" role="button">Filtrer par formation</a>
-{% endblock %}
-
-

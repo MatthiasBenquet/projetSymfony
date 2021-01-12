@@ -5,11 +5,27 @@
 {% block h1 %}Liste de toutes les entreprises{% endblock %}
 
 {% block elements %}
+
 	{# génération des éléments à partir de la bdd #}
-	<li class="list-group-item">Entreprise 1</li>
-	<li class="list-group-item">Entreprise 2</li>
-  	<li class="list-group-item">Entreprise 3</li>
-  	<li class="list-group-item">Entreprise 4</li>
+	{% for entreprise in entreprises %}
+		<li class="list-group-item">
+			<div class="row">
+				<div class="col-md-3">
+					{{entreprise.nom}}
+				</div>
+				<div class="col-md-3">
+					{{entreprise.adresse}}
+				</div>
+				<div class="col-md-3">
+					{{entreprise.urlSiteWeb}}
+				</div>
+				<div class="col-md-3">
+					{{entreprise.telephone}}
+				</div>
+			</div>
+		</li>
+	{% endfor %}
+	
 {% endblock %}
 
 {% block boutons %}<a class="btn btn-primary" href="/" role="button">Accueil</a>{% endblock %}

@@ -81,13 +81,13 @@ class AppFixtures extends Fixture
 			$entreprise->setDomaine($faker->jobTitle());
 			$entreprise->setAdresse($faker->address());
 			$entreprise->setTelephone($faker->phoneNumber());
-			$entreprise->setUrlSiteWeb($faker->url());
+			$entreprise->setUrlSiteWeb('www.'.$faker->domainWord().'.'.$faker->regexify('(com|fr)'));
 
 			//ajout de l'entreprise au tableau
 			$tabEntreprises[] = $entreprise;
 
-			
 		}
+
 		//enregistrement des entreprises
 		foreach ($tabEntreprises as $uneEntreprise) {
 			$manager->persist($uneEntreprise);
@@ -102,7 +102,7 @@ class AppFixtures extends Fixture
 
 			//ajout d'attributs
 			$stage->setNom($faker->regexify('(Développement |Maintenance |Conception )d\'un( logiciel\.|e application\.)'));
-			$stage->setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
+			$stage->setDescription($faker->realText($maxNbChars = 500, $indexSize = 2));
 			$stage->setDateDebut($faker->dateTimeBetween($startDate = '-6 months', $endDate = 'now', $timeZone = 'Europe/Paris'));
 			$stage->setDuree($faker->numberBetween($min = 20, $max = 1000));
 			$stage->setCompetencesRequises($faker->regexify('(PHP|C\+\+|JavaScript|Java|Symfony)'));
@@ -117,6 +117,7 @@ class AppFixtures extends Fixture
 			//ajout relation à Formation
 			//génération nombre de formations à ajouter
 			$nbFormationsConcernees = $faker->numberBetween($min = 1, $max = 7);
+
 			//choix des formations à ajouter
 			$indicesFormationsConcernees = $faker->randomElements($array = array (0,1,2,3,4,5,6), $count = $nbFormationsConcernees);
 
