@@ -30,6 +30,44 @@ class ProStageController extends AbstractController
     }
 
     /**
+     * @Route("/stages_par_entreprise/{nomEntreprise}", name="pro_stage_stages_par_entreprise")
+     */
+    public function stagesParEntreprise(EntrepriseRepository $repositoryEntreprise, $nomEntreprise): Response
+    {
+        //Récupérer l'entreprise correspondant à nomEntreprise
+        $entreprise = $repositoryEntreprise->findOneByNom($nomEntreprise);
+
+        //Récupérer les stages correspondant à l'entreprise
+        $stages = $entreprise->getStages();
+
+        //Envoyer les stages récupérés à la vue chargée de les afficher
+        return $this->render('pro_stage/stages_par_entreprise.html.twig', [
+            'controller_name' => 'ProStageController',
+            'nomEntreprise' => $nomEntreprise,
+            'stages' => $stages,
+        ]);
+    }
+
+    /**
+     * @Route("/stages_par_formation/{nomFormation}", name="pro_stage_stages_par_formation")
+     */
+    public function stagesParFormation(FormationRepository $repositoryFormation, $nomFormation): Response
+    {
+        //Récupérer la formation correspondant à nomFormation
+        $formation = $repositoryFormation->findOneByNom($nomFormation);
+
+        //Récupérer les stages correspondant à la formation
+        $stages = $formation->getStages();
+
+        //Envoyer les stages récupérés à la vue chargée de les afficher
+        return $this->render('pro_stage/stages_par_formation.html.twig', [
+            'controller_name' => 'ProStageController',
+            'nomFormation' => $nomFormation,
+            'stages' => $stages,
+        ]);
+    }
+
+    /**
      * @Route("/entreprises", name="pro_stage_entreprises")
      */
     public function entreprises(EntrepriseRepository $repositoryEntreprise): Response

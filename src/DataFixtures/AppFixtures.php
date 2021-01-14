@@ -53,14 +53,14 @@ class AppFixtures extends Fixture
 		$ecoleIngenieurNantes->setVille("Nantes");
 
 		$ecoleIngenieurLyon = new Formation();
-		$ecoleIngenieurLyon->setNom("INSA Toulouse");
+		$ecoleIngenieurLyon->setNom("INSA Lyon");
 		$ecoleIngenieurLyon->setTypeFormation("École d'Ingénieur");
 		$ecoleIngenieurLyon->setDomaine("Informatique");
 		$ecoleIngenieurLyon->setVille("Lyon");
 
 		$tabFormations = array(
 			$dutInfoAnglet, $dutInfoBordeaux, $lpProgAvanceeAnglet, $licenceInfoBordeaux,
-			$licenceInfoToulouse, $licenceInfoBordeaux, $ecoleIngenieurNantes, $ecoleIngenieurLyon
+			$licenceInfoToulouse, $ecoleIngenieurNantes, $ecoleIngenieurLyon
 		);
 
 		//enregistrement des formations
@@ -94,7 +94,7 @@ class AppFixtures extends Fixture
 		}
 		
 		//création des stages
-		$nbStages = 25; //nombre de stages à créer
+		$nbStages = 10; //nombre de stages à créer
 
 		for ($i = 0; $i < $nbStages; $i++) { 
 			//création du stage
@@ -119,7 +119,10 @@ class AppFixtures extends Fixture
 			$nbFormationsConcernees = $faker->numberBetween($min = 1, $max = 7);
 
 			//choix des formations à ajouter
-			$indicesFormationsConcernees = $faker->randomElements($array = array (0,1,2,3,4,5,6), $count = $nbFormationsConcernees);
+			for ($i = 0; $i < $nbFormationsConcernees; $i++) { 
+				$indicesFormationsConcernees = $faker->randomElement($array = array (0,1,2,3,4,5,6));
+			}
+			
 
 			foreach ($indicesFormationsConcernees as $indiceFormationAAjouter) {
 				//ajout de la formation

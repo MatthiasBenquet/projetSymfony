@@ -8,7 +8,11 @@
 
 	{# génération des éléments à partir de la bdd #}
 	{% for formation in formations %}
-		<li class="list-group-item">{{formation.nom}}</li>
+		<li class="list-group-item">
+			<a href="{{path('pro_stage_stages_par_formation', {nomFormation:formation.nom})}}">
+				{{formation.nom}}
+			</a>
+		</li>
 	{% endfor %}
 
 {% endblock %}

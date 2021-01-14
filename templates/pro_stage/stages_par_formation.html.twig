@@ -1,0 +1,17 @@
+{% extends 'liste.html.twig' %}
+
+{% block title %}Stages par formation{% endblock %}
+
+{% block h1 %}Liste de tous les stages liés à la formation : {{nomFormation}}{% endblock %}
+
+{% block boutons %}
+	<a class="btn btn-primary" href={{path('pro_stage_accueil')}} role="button">Accueil</a>
+{% endblock %}
+
+{% block elements %}
+	{% for stage in stages %}
+		<a href="{{path('pro_stage_stages', {id:stage.id})}}">
+			<li class="list-group-item">Stage {{stage.id}}</li>
+		</a>
+	{% endfor %}
+{% endblock %}

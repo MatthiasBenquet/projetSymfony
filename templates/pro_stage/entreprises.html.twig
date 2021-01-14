@@ -11,7 +11,9 @@
 		<li class="list-group-item">
 			<div class="row">
 				<div class="col-md-3">
-					{{entreprise.nom}}
+					<a href="{{path('pro_stage_stages_par_entreprise', {nomEntreprise:entreprise.nom})}}">
+						{{entreprise.nom}}
+					</a>
 				</div>
 				<div class="col-md-3">
 					{{entreprise.adresse}}
