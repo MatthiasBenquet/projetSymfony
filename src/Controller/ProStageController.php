@@ -32,13 +32,10 @@ class ProStageController extends AbstractController
     /**
      * @Route("/stages_par_entreprise/{nomEntreprise}", name="pro_stage_stages_par_entreprise")
      */
-    public function stagesParEntreprise(EntrepriseRepository $repositoryEntreprise, $nomEntreprise): Response
+    public function stagesParEntreprise(StageRepository $repositoryStage, $nomEntreprise): Response
     {
-        //Récupérer l'entreprise correspondant à nomEntreprise
-        $entreprise = $repositoryEntreprise->findOneByNom($nomEntreprise);
-
-        //Récupérer les stages correspondant à l'entreprise
-        $stages = $entreprise->getStages();
+        //Récupérer les stages proposés par l'entreprise passée en paramètre
+        $stages = $repositoryStage->findByNomEntrepriseQueryBuilder($nomEntreprise);
 
         //Envoyer les stages récupérés à la vue chargée de les afficher
         return $this->render('pro_stage/stages_par_entreprise.html.twig', [
@@ -51,13 +48,10 @@ class ProStageController extends AbstractController
     /**
      * @Route("/stages_par_formation/{nomFormation}", name="pro_stage_stages_par_formation")
      */
-    public function stagesParFormation(FormationRepository $repositoryFormation, $nomFormation): Response
+    public function stagesParFormation(StageRepository $repositoryStage, $nomFormation): Response
     {
-        //Récupérer la formation correspondant à nomFormation
-        $formation = $repositoryFormation->findOneByNom($nomFormation);
-
-        //Récupérer les stages correspondant à la formation
-        $stages = $formation->getStages();
+        //Récupérer les stages correspondant à la formation passée en paramètre
+        $stages = $repositoryStage->findByNomFormationDQL($nomFormation);
 
         //Envoyer les stages récupérés à la vue chargée de les afficher
         return $this->render('pro_stage/stages_par_formation.html.twig', [
@@ -73,7 +67,7 @@ class ProStageController extends AbstractController
     public function entreprises(EntrepriseRepository $repositoryEntreprise): Response
     {
          //Récupérer les entreprises enregistrées en BD
-        $entreprises = $repositoryEntreprise->findAll();
+        $entreprises = $repositoryEntreprise->findEntreprisesAvecStage();
 
         //Envoyer les entreprises récupérées à la vue chargée de les afficher
         return $this->render('pro_stage/entreprises.html.twig', [
@@ -88,7 +82,7 @@ class ProStageController extends AbstractController
     public function formations(FormationRepository $repositoryFormation): Response
     {
         //Récupérer les formations enregistrées en BD
-        $formations = $repositoryFormation->findAll();
+        $formations = $repositoryFormation->findFormationsAvecStage();
 
         //Envoyer les formations récupérées à la vue chargée de les afficher
         return $this->render('pro_stage/formations.html.twig', [
