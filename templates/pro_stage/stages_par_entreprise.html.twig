@@ -4,10 +4,6 @@
 
 {% block h1 %}Liste de tous les stages proposés par {{nomEntreprise}}{% endblock %}
 
-{% block boutons %}
-	<a class="btn btn-primary" href={{path('pro_stage_accueil')}} role="button">Accueil</a>
-{% endblock %}
-
 {% block elements %}
 	{% for stage in stages %}
 		<a href="{{path('pro_stage_stages', {id:stage.id})}}">

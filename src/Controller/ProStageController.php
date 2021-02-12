@@ -20,7 +20,7 @@ class ProStageController extends AbstractController
     public function index(StageRepository $repositoryStage): Response
     {
         //Récupérer les stages enregistrés en BD
-        $stages = $repositoryStage->findAll();
+        $stages = $repositoryStage->findAllStagesEtEntreprises();
 
         //Envoyer les stages récupérées à la vue chargée de les afficher
         return $this->render('pro_stage/index.html.twig', [
@@ -99,6 +99,16 @@ class ProStageController extends AbstractController
         return $this->render('pro_stage/stages.html.twig', [
             'controller_name' => 'ProStageController',
             'stage' => $stage,
+        ]);
+    }
+
+    /**
+     * @Route("/ajoutEntreprise", name="pro_stage_ajout_entreprise")
+     */
+    public function ajoutEntreprise(): Response
+    {
+        return $this->render('pro_stage/ajoutEntreprise.html.twig', [
+            'controller_name' => 'ProStageController',
         ]);
     }
 }

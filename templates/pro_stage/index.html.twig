@@ -4,16 +4,18 @@
 
 {% block h1 %}Liste de tous les stages{% endblock %}
 
-{% block boutons %}
-	<a class="btn btn-primary" href={{path('pro_stage_entreprises')}} role="button">Filtrer par entreprise</a>
-	<a class="btn btn-primary" href={{path('pro_stage_formations')}} role="button">Filtrer par formation</a>
-{% endblock %}
-
 {% block elements %}
 	{# Affichage des stages à partir de la bdd #}
+	<li class="list-group-item">
 	{% for stage in stages %}
-		<a href="{{path('pro_stage_stages', {id:stage.id})}}">
-			<li class="list-group-item">Stage {{stage.id}}</li>
-		</a>
+		<div class="row">
+			<div class="col-md-6">
+				<a href="{{path('pro_stage_stages', {id:stage.id})}}">Stage {{stage.id ~ '  ' ~ stage.nom}}</a>
+			</div>
+			<div class="col-md-6">
+				{{stage.entreprise.nom}}
+			</div>
+		</div>
 	{% endfor %}
+	</li>
 {% endblock %}
