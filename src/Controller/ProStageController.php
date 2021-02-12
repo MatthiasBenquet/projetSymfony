@@ -11,6 +11,9 @@ use App\Entity\Entreprise;
 use App\Repository\EntrepriseRepository;
 use App\Entity\Formation;
 use App\Repository\FormationRepository;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class ProStageController extends AbstractController
 {
@@ -112,11 +115,11 @@ class ProStageController extends AbstractController
 
         //création du formulaire de saisie des informarions de l'entreprise
         $formulaireEntreprise = $this->createFormBuilder($entreprise)
-        ->add('nom')
-        ->add('domaine')
-        ->add('adresse')
-        ->add('url_site_web')
-        ->add('telephone')
+        ->add('nom', TextType::class)
+        ->add('domaine', TextType::class)
+        ->add('adresse', TextType::class)
+        ->add('url_site_web', UrlType::class)
+        ->add('telephone', TelType::class)
         ->getForm();
 
         //afficher la page présentant le formulaire d'ajout d'une entreprise
