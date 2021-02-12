@@ -9,5 +9,18 @@ Ajout d'une entreprise
 {% block body %}
 Saisissez les caractéristiques de l'entreprise que vous voulez ajouter.
 
-{{ form(vueFormulaire) }}
+{{ form_start(vueFormulaire) }}
+
+{{ form_row(vueFormulaire.nom) }}
+
+{{ form_row(vueFormulaire.domaine) }}
+
+{{ form_row(vueFormulaire.adresse) }}
+
+{{ form_row(vueFormulaire.url_site_web) }}
+
+{{ form_row(vueFormulaire.telephone) }}
+
+{{ form_end(vueFormulaire) }}
+
 {% endblock %}
