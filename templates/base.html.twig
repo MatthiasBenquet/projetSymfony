@@ -14,16 +14,16 @@
     	<div class="container-fluid">
         <ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" href="{{path('pro_stage_accueil')}}">Accueil</a>
+					<a class="nav-link {% block accueilActif %}{% endblock %}" href="{{path('pro_stage_accueil')}}">Accueil</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{path('pro_stage_entreprises')}}">Entreprises</a>
+					<a class="nav-link {% block entreprisesActif %}{% endblock %}" href="{{path('pro_stage_entreprises')}}">Entreprises</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{path('pro_stage_formations')}}">Formations</a>
+					<a class="nav-link {% block formationsActif %}{% endblock %}" href="{{path('pro_stage_formations')}}">Formations</a>
 				</li>
         <li class="nav-item">
-					<a class="nav-link" href="{{path('pro_stage_ajout_entreprise')}}">Ajout Entreprise</a>
+					<a class="nav-link {% block ajoutEntrepriseActif %}{% endblock %}" href="{{path('pro_stage_ajout_entreprise')}}">Ajout Entreprise</a>
 				</li>
 			</ul>
     		{% block body %}{% endblock %}

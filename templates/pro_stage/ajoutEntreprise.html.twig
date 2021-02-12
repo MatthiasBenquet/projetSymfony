@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Ajout d'une entreprises
+Ajout d'une entreprise
 {% endblock %}
 
-{% block body %}
+{% block ajoutEntrepriseActif %}active{% endblock %}
 
+{% block body %}
+Saisissez les caractéristiques de l'entreprise que vous voulez ajouter.
+
+{{ form(vueFormulaire) }}
 {% endblock %}
