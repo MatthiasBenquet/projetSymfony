@@ -7,19 +7,19 @@ Ajout d'une entreprise
 {% block ajoutEntrepriseActif %}active{% endblock %}
 
 {% block body %}
-Saisissez les caractéristiques de l'entreprise que vous voulez ajouter.
+<h1>Saisissez les caractéristiques de l'entreprise que vous voulez ajouter.</h1>
 
 {{ form_start(vueFormulaire) }}
 
-{{ form_row(vueFormulaire.nom) }}
+{{ form_row(vueFormulaire.nom, {'attr':{'placeholder':"Nom de l'entreprise . . ."}}) }}
 
-{{ form_row(vueFormulaire.domaine) }}
+{{ form_row(vueFormulaire.domaine, {'attr':{'placeholder':"Domaine des activités de l'entreprise . . ."}}) }}
 
-{{ form_row(vueFormulaire.adresse) }}
+{{ form_row(vueFormulaire.adresse, {'attr':{'placeholder':"Adresse de l'entreprise . . ."}}) }}
 
-{{ form_row(vueFormulaire.url_site_web) }}
+{{ form_row(vueFormulaire.url_site_web, {'attr':{'placeholder':"URL du site web de l'entreprise . . ."}}) }}
 
-{{ form_row(vueFormulaire.telephone) }}
+{{ form_row(vueFormulaire.telephone, {'attr':{'placeholder':"Numéro de téléphone de l'entreprise . . ."}}) }}
 
 {{ form_end(vueFormulaire) }}
 
