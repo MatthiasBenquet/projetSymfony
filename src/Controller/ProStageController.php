@@ -115,9 +115,9 @@ class ProStageController extends AbstractController
 
         //création du formulaire de saisie des informarions de l'entreprise
         $formulaireEntreprise = $this->createFormBuilder($entreprise)
-        ->add('nom', TextType::class)
-        ->add('domaine', TextType::class)
-        ->add('adresse', TextType::class)
+        ->add('nom')
+        ->add('domaine')
+        ->add('adresse')
         ->add('url_site_web', UrlType::class)
         ->add('telephone', TelType::class)
         ->getForm();
