@@ -11,6 +11,8 @@ use App\Entity\Entreprise;
 use App\Repository\EntrepriseRepository;
 use App\Entity\Formation;
 use App\Repository\FormationRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Persistence\ObjectManager;
 
 class ProStageController extends AbstractController
 {
@@ -105,7 +107,7 @@ class ProStageController extends AbstractController
     /**
      * @Route("/ajoutEntreprise", name="pro_stage_ajout_entreprise")
      */
-    public function ajoutEntreprise(): Response
+    public function ajoutEntreprise(Request $request, ObjectManager $manager): Response
     {
         //création de l'objet entreprise à ajoutEntreprise
         $entreprise = new Entreprise();
@@ -118,6 +120,23 @@ class ProStageController extends AbstractController
         ->add('url_site_web')
         ->add('telephone')
         ->getForm();
+
+        /* on demande au formulaire d'analyser la dernière requête http.
+           si le tableau POST contenu dans la requête contient des variables nom, domaine, etc...
+           alors la méthode handleRequest() récupère les valeurs de ces variables et les affecte
+           à l'objet $entreprise. */
+        $formulaireEntreprise->handleRequest($request);
+
+        if ($formulaireEntreprise->isSubmitted()) {
+
+          //enregistrer l'entreprise en base de données
+          $manager->persist($entreprise);
+          $manager->flush();
+
+          //rediriger l'utilisateur vers la page d'accueil
+          return redirectToRoute('pro_stage_accueil');
+
+        }
 
         //afficher la page présentant le formulaire d'ajout d'une entreprise
         return $this->render('pro_stage/ajoutEntreprise.html.twig', [
