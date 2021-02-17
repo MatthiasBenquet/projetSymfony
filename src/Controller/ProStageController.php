@@ -11,9 +11,6 @@ use App\Entity\Entreprise;
 use App\Repository\EntrepriseRepository;
 use App\Entity\Formation;
 use App\Repository\FormationRepository;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class ProStageController extends AbstractController
 {
@@ -118,8 +115,8 @@ class ProStageController extends AbstractController
         ->add('nom')
         ->add('domaine')
         ->add('adresse')
-        ->add('url_site_web', UrlType::class)
-        ->add('telephone', TelType::class)
+        ->add('url_site_web')
+        ->add('telephone')
         ->getForm();
 
         //afficher la page présentant le formulaire d'ajout d'une entreprise
