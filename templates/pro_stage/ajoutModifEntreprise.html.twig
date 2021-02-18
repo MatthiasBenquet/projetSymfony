@@ -1,13 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
+{% if action == "ajouter" %}
 Ajout d'une entreprise
+{% else %}
+Modification d'une entreprise
+{% endif %}
 {% endblock %}
 
-{% block ajoutEntrepriseActif %}active{% endblock %}
+{% block ajoutEntrepriseActif %}
+{% if action == "ajouter" %}
+active
+{% endif %}
+{% endblock %}
 
 {% block body %}
+{% if action == "ajouter" %}
 <h1>Saisissez les caractéristiques de l'entreprise que vous voulez ajouter.</h1>
+{% else %}
+<h1>Saisissez les nouvelles caractéristiques de l'entreprise choisie.</h1>
+{% endif %}
 
 {{ form_start(vueFormulaire) }}
 
@@ -21,7 +33,11 @@ Ajout d'une entreprise
 
 {{ form_row(vueFormulaire.telephone, {'attr':{'placeholder':"Numéro de téléphone de l'entreprise . . ."}}) }}
 
+{% if action == "ajouter" %}
 <button type="submit" class="btn btn-dark">Ajouter</button>
+{% else %}
+<button type="submit" class="btn btn-dark">Modifier</button>
+{% endif %}
 
 {{ form_end(vueFormulaire) }}
 

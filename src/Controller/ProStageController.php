@@ -144,9 +144,50 @@ class ProStageController extends AbstractController
         }
 
         //afficher la page présentant le formulaire d'ajout d'une entreprise
-        return $this->render('pro_stage/ajoutEntreprise.html.twig', [
+        return $this->render('pro_stage/ajoutModifEntreprise.html.twig', [
             'controller_name' => 'ProStageController',
             'vueFormulaire' => $formulaireEntreprise->createView(),
+            'action' => "ajouter",
+        ]);
+    }
+
+    /**
+     * @Route("/modificationEntreprise/{id}", name="pro_stage_modification_entreprise")
+     */
+    public function modificationEntreprise(Request $request, Entreprise $entreprise): Response
+    {
+        //création du formulaire de saisie des informarions de l'entreprise
+        $formulaireEntreprise = $this->createFormBuilder($entreprise)
+        ->add('nom')
+        ->add('domaine')
+        ->add('adresse')
+        ->add('url_site_web')
+        ->add('telephone')
+        ->getForm();
+
+        /* on demande au formulaire d'analyser la dernière requête http.
+           si le tableau POST contenu dans la requête contient des variables nom, domaine, etc...
+           alors la méthode handleRequest() récupère les valeurs de ces variables et les affecte
+           à l'objet $entreprise. */
+        $formulaireEntreprise->handleRequest($request);
+
+        if ($formulaireEntreprise->isSubmitted()) {
+
+          //enregistrer l'entreprise en base de données
+          $manager = $this->getDoctrine()->getManager();
+          $manager->persist($entreprise);
+          $manager->flush();
+
+          //rediriger l'utilisateur vers la page d'accueil
+          return $this->redirectToRoute('pro_stage_accueil');
+
+        }
+
+        //afficher la page présentant le formulaire d'ajout d'une entreprise
+        return $this->render('pro_stage/ajoutModifEntreprise.html.twig', [
+            'controller_name' => 'ProStageController',
+            'vueFormulaire' => $formulaireEntreprise->createView(),
+            'action' => "modifier",
         ]);
     }
 }

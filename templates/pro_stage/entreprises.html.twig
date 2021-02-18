@@ -2,7 +2,7 @@
 
 {% block title %}Entreprises{% endblock %}
 
-{% block h1 %}Liste de toutes les entreprises{% endblock %}
+{% block h1 %}Liste de toutes les entreprises proposant des stages{% endblock %}
 
 {% block entreprisesActif %}active{% endblock %}
 
@@ -20,11 +20,16 @@
 				<div class="col-md-3">
 					{{entreprise.adresse}}
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					{{entreprise.urlSiteWeb}}
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					{{entreprise.telephone}}
+				</div>
+				<div class="col-md-2">
+					<a href="{{path('pro_stage_modification_entreprise', {id:entreprise.id})}}">
+						Modifier
+					</a>
 				</div>
 			</div>
 		</li>
