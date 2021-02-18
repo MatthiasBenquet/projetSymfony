@@ -165,7 +165,7 @@ class ProStageController extends AbstractController
         ->add('telephone')
         ->getForm();
 
-        /* on demande au formulaire d'analyser la dernière requête http.
+        /* on demande au formulaire d'analyser la dernière requête http
            si le tableau POST contenu dans la requête contient des variables nom, domaine, etc...
            alors la méthode handleRequest() récupère les valeurs de ces variables et les affecte
            à l'objet $entreprise. */
@@ -173,7 +173,7 @@ class ProStageController extends AbstractController
 
         if ($formulaireEntreprise->isSubmitted()) {
 
-          //enregistrer l'entreprise en base de données
+          // enregistrer l'entreprise en base de données
           $manager = $this->getDoctrine()->getManager();
           $manager->persist($entreprise);
           $manager->flush();
