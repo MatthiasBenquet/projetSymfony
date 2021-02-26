@@ -12,8 +12,7 @@ use App\Repository\EntrepriseRepository;
 use App\Entity\Formation;
 use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
-//retiré car ça ne marche pas (je ne sais pas encore pourquoi)
-//use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ProStageController extends AbstractController
 {
@@ -108,10 +107,8 @@ class ProStageController extends AbstractController
     /**
      * @Route("/ajoutEntreprise", name="pro_stage_ajout_entreprise")
      */
-    public function ajoutEntreprise(Request $request): Response
+    public function ajoutEntreprise(Request $request, EntityManagerInterface $manager): Response
     {
-        //retrait de l'injection de dépendance "ObjectManager $manager" car ça ne marche pas (je ne sais pas encore pourquoi)
-
 
         //création de l'objet entreprise à ajoutEntreprise
         $entreprise = new Entreprise();
@@ -133,13 +130,11 @@ class ProStageController extends AbstractController
 
         if ($formulaireEntreprise->isSubmitted()) {
 
-          //enregistrer l'entreprise en base de données
-          $manager = $this->getDoctrine()->getManager();
           $manager->persist($entreprise);
           $manager->flush();
 
           //rediriger l'utilisateur vers la page d'accueil
-          return redirectToRoute('pro_stage_accueil');
+          return $this->redirectToRoute('pro_stage_accueil');
 
         }
 
