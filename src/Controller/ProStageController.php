@@ -128,7 +128,7 @@ class ProStageController extends AbstractController
            à l'objet $entreprise. */
         $formulaireEntreprise->handleRequest($request);
 
-        if ($formulaireEntreprise->isSubmitted()) {
+        if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid()) {
 
           $manager->persist($entreprise);
           $manager->flush();
@@ -149,7 +149,7 @@ class ProStageController extends AbstractController
     /**
      * @Route("/modificationEntreprise/{id}", name="pro_stage_modification_entreprise")
      */
-    public function modificationEntreprise(Request $request, Entreprise $entreprise): Response
+    public function modificationEntreprise(Request $request, EntityManagerInterface $manager, Entreprise $entreprise): Response
     {
         //création du formulaire de saisie des informarions de l'entreprise
         $formulaireEntreprise = $this->createFormBuilder($entreprise)
@@ -166,10 +166,8 @@ class ProStageController extends AbstractController
            à l'objet $entreprise. */
         $formulaireEntreprise->handleRequest($request);
 
-        if ($formulaireEntreprise->isSubmitted()) {
+        if ($formulaireEntreprise->isSubmitted() && $formulaireEntreprise->isValid()) {
 
-          // enregistrer l'entreprise en base de données
-          $manager = $this->getDoctrine()->getManager();
           $manager->persist($entreprise);
           $manager->flush();
 

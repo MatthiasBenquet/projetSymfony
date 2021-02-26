@@ -22,7 +22,7 @@ active
 <h1>Saisissez les nouvelles caractéristiques de l'entreprise choisie.</h1>
 {% endif %}
 
-{{ form_start(vueFormulaire) }}
+{{ form_start(vueFormulaire, {'attr':{'novalidate':"novalidate"}}) }}
 
 {{ form_row(vueFormulaire.nom, {'attr':{'placeholder':"Nom de l'entreprise . . ."}}) }}
 
