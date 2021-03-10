@@ -49,6 +49,11 @@ class Entreprise
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\Regex(pattern="#[0-9]{10}#", message="Le numéro de téléphone doit contenir 10 chiffres uniquement.")
+     * @Assert\Length(
+     *      max = 10,
+     *      maxMessage = "Le numéro de téléphone doit contenir 10 chiffres uniquement."
+     * )
      */
     private $telephone;
 

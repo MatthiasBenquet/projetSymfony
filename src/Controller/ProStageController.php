@@ -13,6 +13,7 @@ use App\Entity\Formation;
 use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\EntrepriseType;
 
 class ProStageController extends AbstractController
 {
@@ -69,7 +70,7 @@ class ProStageController extends AbstractController
     public function entreprises(EntrepriseRepository $repositoryEntreprise): Response
     {
          //Récupérer les entreprises enregistrées en BD
-        $entreprises = $repositoryEntreprise->findEntreprisesAvecStage();
+        $entreprises = $repositoryEntreprise->findAll();
 
         //Envoyer les entreprises récupérées à la vue chargée de les afficher
         return $this->render('pro_stage/entreprises.html.twig', [
@@ -114,13 +115,7 @@ class ProStageController extends AbstractController
         $entreprise = new Entreprise();
 
         //création du formulaire de saisie des informarions de l'entreprise
-        $formulaireEntreprise = $this->createFormBuilder($entreprise)
-        ->add('nom')
-        ->add('domaine')
-        ->add('adresse')
-        ->add('url_site_web')
-        ->add('telephone')
-        ->getForm();
+        $formulaireEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
 
         /* on demande au formulaire d'analyser la dernière requête http.
            si le tableau POST contenu dans la requête contient des variables nom, domaine, etc...
@@ -151,14 +146,8 @@ class ProStageController extends AbstractController
      */
     public function modificationEntreprise(Request $request, EntityManagerInterface $manager, Entreprise $entreprise): Response
     {
-        //création du formulaire de saisie des informarions de l'entreprise
-        $formulaireEntreprise = $this->createFormBuilder($entreprise)
-        ->add('nom')
-        ->add('domaine')
-        ->add('adresse')
-        ->add('url_site_web')
-        ->add('telephone')
-        ->getForm();
+        //création du formulaire de modifier les informarions de l'entreprise
+        $formulaireEntreprise = $this->createForm(EntrepriseType::class, $entreprise);
 
         /* on demande au formulaire d'analyser la dernière requête http
            si le tableau POST contenu dans la requête contient des variables nom, domaine, etc...
