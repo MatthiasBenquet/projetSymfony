@@ -14,6 +14,7 @@ use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Form\EntrepriseType;
+use App\Form\StageType;
 
 class ProStageController extends AbstractController
 {
@@ -170,6 +171,42 @@ class ProStageController extends AbstractController
             'controller_name' => 'ProStageController',
             'vueFormulaire' => $formulaireEntreprise->createView(),
             'action' => "modifier",
+        ]);
+    }
+
+    /**
+     * @Route("/ajoutStage", name="pro_stage_ajout_stage")
+     */
+    public function ajoutStage(Request $request, EntityManagerInterface $manager): Response
+    {
+
+        //création de l'objet entreprise à ajoutEntreprise
+        $stage = new Stage();
+
+        //création du formulaire de saisie des informarions de l'entreprise
+        $formulaireStage = $this->createForm(StageType::class, $stage);
+
+        /* on demande au formulaire d'analyser la dernière requête http.
+           si le tableau POST contenu dans la requête contient des variables nom, domaine, etc...
+           alors la méthode handleRequest() récupère les valeurs de ces variables et les affecte
+           à l'objet $entreprise. */
+        $formulaireStage->handleRequest($request);
+
+        if ($formulaireStage->isSubmitted() && $formulaireStage->isValid()) {
+
+          $manager->persist($stage);
+          $manager->flush();
+
+          //rediriger l'utilisateur vers la page d'accueil
+          return $this->redirectToRoute('pro_stage_accueil');
+
+        }
+
+        //afficher la page présentant le formulaire d'ajout d'une entreprise
+        return $this->render('pro_stage/ajoutStage.html.twig', [
+            'controller_name' => 'ProStageController',
+            'vueFormulaire' => $formulaireStage->createView(),
+            'action' => "ajouter",
         ]);
     }
 }
