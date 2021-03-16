@@ -4,8 +4,8 @@ security:
         users_in_memory:
           memory:
             users:
-              admin: { password: admin, roles: ROLE_ADMIN}
-              user: { password: user, roles: ROLE_USER}
+              admin: { password: $2y$10$j2YqJjXaQu825gYlmJ.a8eGF8k2GOHc0kKs4xlCyoopRiU7knKLry, roles: ROLE_ADMIN}
+              user: { password: $2y$10$wKprqSVKHqP87GGZmiJPwuVgb43b4SalwCSafC2oVK1DatBFRSy4u, roles: ROLE_USER}
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -30,4 +30,6 @@ security:
         - { path: ^/ajoutStage, roles: ROLE_USER }
 
     encoders:
-      Symfony\Component\Security\Core\User\User: plaintext
+      Symfony\Component\Security\Core\User\User:
+        algorithm: bcrypt
+        cost:      15
