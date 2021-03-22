@@ -7,12 +7,30 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Formation;
 use App\Entity\Entreprise;
 use App\Entity\Stage;
+use App\Entity\User;
 
 class AppFixtures extends Fixture
 {
 	public function load(ObjectManager $manager)
 	{
-    	//création d'un générateur de données Faker
+		//création de 2 utilisateurs à enregistrer en BD
+		$perceval = new User();
+		$perceval->setPrenom('Perceval');
+		$perceval->setNom('de Galles');
+		$perceval->setEmail('cestpasfaux@onenagros.fr');
+		$perceval->setRoles(['ROLE_ADMIN']);
+		$perceval->setPassword('$2y$10$Xi2jwmPXxTOIaQIvu70HuOv5fEkt5K4zOesTEGBFfxN.r.t2z1v7S');
+		$manager->persist($perceval);
+
+		$karadoc = new User();
+		$karadoc->setPrenom('Karadoc');
+		$karadoc->setNom('de Vannes');
+		$karadoc->setEmail('legras@cestlavie.fr');
+		$karadoc->setRoles(['ROLE_USER']);
+		$karadoc->setPassword('$2y$10$WZc7jSX4Gocp9mbBZ4j/ceMPA6oS0r3BNfFgu5Nh.49uuyPC7gFMq');
+		$manager->persist($karadoc);
+
+    //création d'un générateur de données Faker
 		$faker = \Faker\Factory::create('fr_FR');
 
 		//création des formations
@@ -41,7 +59,7 @@ class AppFixtures extends Fixture
 		$licenceInfoBordeaux->setVille("Bordeaux");
 
 		$licenceInfoToulouse = new Formation();
-		$licenceInfoToulouse->setNom("Licence Informatique Toulouse"); 
+		$licenceInfoToulouse->setNom("Licence Informatique Toulouse");
 		$licenceInfoToulouse->setTypeFormation("Licence");
 		$licenceInfoToulouse->setDomaine("Informatique");
 		$licenceInfoToulouse->setVille("Toulouse");
@@ -72,7 +90,7 @@ class AppFixtures extends Fixture
 		$nbEntreprises = 10; //nombre d'entreprises à créer
 		$tabEntreprises = array();
 
-		for ($i=0; $i < $nbEntreprises; $i++) { 
+		for ($i=0; $i < $nbEntreprises; $i++) {
 			//création de l'entreprise
 			$entreprise = new Entreprise();
 
@@ -92,11 +110,11 @@ class AppFixtures extends Fixture
 		foreach ($tabEntreprises as $uneEntreprise) {
 			$manager->persist($uneEntreprise);
 		}
-		
+
 		//création des stages
 		$nbStages = 10; //nombre de stages à créer
 
-		for ($i = 0; $i < $nbStages; $i++) { 
+		for ($i = 0; $i < $nbStages; $i++) {
 			//création du stage
 			$stage = new Stage();
 
@@ -119,10 +137,8 @@ class AppFixtures extends Fixture
 			$nbFormationsConcernees = $faker->numberBetween($min = 1, $max = 7);
 
 			//choix des formations à ajouter
-			for ($i = 0; $i < $nbFormationsConcernees; $i++) { 
-				$indicesFormationsConcernees = $faker->randomElement($array = array (0,1,2,3,4,5,6));
-			}
-			
+			$indicesFormationsConcernees = $faker->randomElements($array = array (0,1,2,3,4,5,6), $count = $nbFormationsConcernees);
+
 
 			foreach ($indicesFormationsConcernees as $indiceFormationAAjouter) {
 				//ajout de la formation
@@ -134,7 +150,7 @@ class AppFixtures extends Fixture
 				//enregistrement de la formation modifiée
 				$manager->persist($tabFormations[$indiceFormationAAjouter]);
 			}
-			
+
 			//complétion des relations à Entreprise (après avoir ajouté les formations)
 			$tabEntreprises[$indiceEntreprise]->addStage($stage);
 
