@@ -28,6 +28,18 @@
         <li class="nav-item">
 					<a class="nav-link {% block ajoutStageActif %}{% endblock %}" href="{{path('pro_stage_ajout_stage')}}">Ajout Stage</a>
 				</li>
+        <li class="nav-item active">
+            {% if is_granted('ROLE_USER') %}
+            <a class="nav-link" href="#">
+            Deconnexion
+            <p>{{ app.user.prenom ~ ' ' ~ app.user.nom }}</p>
+            </a>
+            {% else %}
+            <a class="nav-link" href="/login">
+            Connexion
+            </a>
+            {% endif %}
+        </li>
 			</ul>
     		{% block body %}{% endblock %}
     	</div>
