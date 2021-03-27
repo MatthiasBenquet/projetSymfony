@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
          à l'objet $user. */
       //$formulaireUser->handleRequest($request);
 
-      //if ($formulaireUser->isSubmitted() && $formulaireUser->isValid()) {
+      if ($formulaireUser->isSubmitted() && $formulaireUser->isValid()) {
 
         //$manager->persist($user);
         //$manager->flush();
@@ -70,4 +70,5 @@ class SecurityController extends AbstractController
         'controller_name' => 'SecurityController',
         'vueFormulaire' => $formulaireUser->createView(),
     ]);
+  }
 }

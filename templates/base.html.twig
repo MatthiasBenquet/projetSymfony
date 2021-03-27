@@ -16,30 +16,43 @@
 				<li class="nav-item">
 					<a class="nav-link {% block accueilActif %}{% endblock %}" href="{{path('pro_stage_accueil')}}">Accueil</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link {% block entreprisesActif %}{% endblock %}" href="{{path('pro_stage_entreprises')}}">Entreprises</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link {% block formationsActif %}{% endblock %}" href="{{path('pro_stage_formations')}}">Formations</a>
-				</li>
-        <li class="nav-item">
-					<a class="nav-link {% block ajoutEntrepriseActif %}{% endblock %}" href="{{path('pro_stage_ajout_entreprise')}}">Ajout Entreprise</a>
-				</li>
-        <li class="nav-item">
-					<a class="nav-link {% block ajoutStageActif %}{% endblock %}" href="{{path('pro_stage_ajout_stage')}}">Ajout Stage</a>
-				</li>
-        <li class="nav-item active">
-            {% if is_granted('ROLE_USER') %}
-            <a class="nav-link" href="{{ path('app_logout') }}">
-            <button type="button" class="btn btn-outline-danger">Deconnexion</button>
-            <p>{{ app.user.prenom ~ ' ' ~ app.user.nom }}</p>
-            </a>
+        {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+  				<li class="nav-item">
+  					<a class="nav-link {% block entreprisesActif %}{% endblock %}" href="{{path('pro_stage_entreprises')}}">Entreprises</a>
+  				</li>
+  				<li class="nav-item">
+  					<a class="nav-link {% block formationsActif %}{% endblock %}" href="{{path('pro_stage_formations')}}">Formations</a>
+  				</li>
+          <li class="nav-item">
+  					<a class="nav-link {% block ajoutStageActif %}{% endblock %}" href="{{path('pro_stage_ajout_stage')}}">Ajout Stage</a>
+  				</li>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+          <li class="nav-item">
+  					<a class="nav-link {% block ajoutEntrepriseActif %}{% endblock %}" href="{{path('pro_stage_ajout_entreprise')}}">Ajout Entreprise</a>
+  				</li>
+        {% endif %}
+          {% if is_granted('ROLE_USER') %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ path('app_logout') }}">
+                {{ app.user.prenom ~ ' ' ~ app.user.nom }}
+                <button type="button" class="btn btn-outline-danger btn-sm">Deconnexion</button>
+              </a>
+            </li>
+            <li>
+            </li>
             {% else %}
-            <a class="nav-link" href="{{ path('app_login') }}">
-            <button type="button" class="btn btn-outline-success">Connexion</button>
-            </a>
-            {% endif %}
-        </li>
+            <li class="nav-item">
+    					<a class="nav-link" href="{{path('app_signIn')}}">
+                <button type="button" class="btn btn-outline-primary btn-sm">Inscription</button>
+              </a>
+    				</li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ path('app_login') }}">
+                <button type="button" class="btn btn-outline-success btn-sm">Connexion</button>
+              </a>
+            </li>
+          {% endif %}
 			</ul>
     		{% block body %}{% endblock %}
     	</div>

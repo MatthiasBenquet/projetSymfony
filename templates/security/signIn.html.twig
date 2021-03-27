@@ -5,13 +5,23 @@
 {% block body %}
 {{ form_start(vueFormulaire, {'attr':{'novalidate':"novalidate"}}) }}
 
+<br/>
+
 {{ form_row(vueFormulaire.prenom, {'attr':{'placeholder':"Votre prénom . . ."}}) }}
+
+<br/>
 
 {{ form_row(vueFormulaire.nom, {'attr':{'placeholder':"Votre nom . . ."}}) }}
 
+<br/>
+
 {{ form_row(vueFormulaire.email, {'attr':{'placeholder':"Votre adresse mail . . ."}}) }}
 
+<br/>
+
 {{ form_row(vueFormulaire.password, {'attr':{'placeholder':"Votre mot de passe . . ."}}) }}
+
+<br/>
 
 <button type="submit" class="btn btn-dark">S'inscrire</button>
 
