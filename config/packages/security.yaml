@@ -33,6 +33,7 @@ security:
         - { path: ^/ajoutEntreprise, roles: ROLE_ADMIN }
         - { path: ^/modificationEntreprise, roles: ROLE_ADMIN }
         - { path: ^/ajoutStage, roles: ROLE_USER }
+        - { path: ^/formation, roles: ROLE_ADMIN }
 
     encoders:
       Symfony\Component\Security\Core\User\User:
