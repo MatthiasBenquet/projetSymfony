@@ -211,4 +211,9 @@ class Stage
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return "Stage n°".$this->getId()." - ".$this->getNom();
+    }
 }
