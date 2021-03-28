@@ -10,6 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -41,7 +42,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/signIn", name="app_signIn")
      */
-    public function signIn(Request $request, EntityManagerInterface $manager): Response
+    public function signIn(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder): Response
     {
 
       //création de l'objet User à ajouter en BD
@@ -58,11 +59,19 @@ class SecurityController extends AbstractController
 
       if ($formulaireUser->isSubmitted() && $formulaireUser->isValid()) {
 
-        //$manager->persist($user);
-        //$manager->flush();
+        // Attribuer un rôle à l'utilisateur
+        $user->setRoles(['ROLE_USER']);
+
+        // Encoder le mot de passe
+        $encodedPassword = $encoder->encodePassword($user, $user->getPassword());
+        $user->setPassword($encodedPassword);
+
+        // Enregistrer l'utilisateur en base de données
+        $manager->persist($user);
+        $manager->flush();
 
         //rediriger l'utilisateur vers la page d'accueil
-        return $this->redirectToRoute('pro_stage_accueil');
+        return $this->redirectToRoute('app_login');
     }
 
     //afficher la page présentant le formulaire d'ajout d'un utilsateur
