@@ -54,7 +54,7 @@ class SecurityController extends AbstractController
         si le tableau POST contenu dans la requête contient des variables nom, prénom, etc...
          alors la méthode handleRequest() récupère les valeurs de ces variables et les affecte
          à l'objet $user. */
-      //$formulaireUser->handleRequest($request);
+      $formulaireUser->handleRequest($request);
 
       if ($formulaireUser->isSubmitted() && $formulaireUser->isValid()) {
 

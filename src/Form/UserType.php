@@ -6,6 +6,8 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
 {
@@ -15,7 +17,14 @@ class UserType extends AbstractType
             ->add('prenom')
             ->add('nom')
             ->add('email')
-            ->add('password')
+            ->add('password', RepeatedType::class, [
+              'type' => passwordType::class,
+              'invalid_message' => 'Les mots de passes doivent être identiques.',
+              'options' => ['attr' => ['class' => 'password-field']],
+              'required' => true,
+              'first_options' => ['label' => 'Choisissez un mot de passe.'],
+              'second_options' => ['label' => 'Répétez le mot de passe.'],
+            ])
         ;
     }
 
