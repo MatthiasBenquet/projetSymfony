@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/formation")
@@ -28,16 +29,15 @@ class FormationController extends AbstractController
     /**
      * @Route("/new", name="formation_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $formation = new Formation();
         $form = $this->createForm(FormationType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($formation);
-            $entityManager->flush();
+            $manager->persist($formation);
+            $manager->flush();
 
             return $this->redirectToRoute('formation_index');
         }

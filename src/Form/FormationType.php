@@ -6,6 +6,8 @@ use App\Entity\Formation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Stage;
 
 class FormationType extends AbstractType
 {
@@ -16,7 +18,12 @@ class FormationType extends AbstractType
             ->add('typeFormation')
             ->add('domaine')
             ->add('ville')
-            ->add('stages')
+            ->add('stages', EntityType::class, array(
+              'class' => Stage::class,
+              'choice_label' => 'nom',
+              'multiple' => true,
+              'expanded' => true,
+            ))
         ;
     }
 
