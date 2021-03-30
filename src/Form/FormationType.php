@@ -18,12 +18,6 @@ class FormationType extends AbstractType
             ->add('typeFormation')
             ->add('domaine')
             ->add('ville')
-            ->add('stages', EntityType::class, array(
-              'class' => Stage::class,
-              'choice_label' => 'nom',
-              'multiple' => true,
-              'expanded' => true,
-            ))
         ;
     }
 
