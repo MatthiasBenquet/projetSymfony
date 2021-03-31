@@ -25,11 +25,14 @@
   				</li>
         {% endif %}
         {% if is_granted('ROLE_ADMIN') %}
-        <li class="nav-item">
-          <a class="nav-link {% block formationsActif %}{% endblock %}" href="{{path('formation_index')}}">Gestion Formations</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link {% block formationsActif %}{% endblock %}" href="{{path('formation_index')}}">Gestion Formations</a>
+          </li>
           <li class="nav-item">
   					<a class="nav-link {% block ajoutEntrepriseActif %}{% endblock %}" href="{{path('pro_stage_ajout_entreprise')}}">Ajout Entreprise</a>
+  				</li>
+          <li class="nav-item">
+  					<a class="nav-link" href="/admin">Partie administrateur</a>
   				</li>
         {% endif %}
           {% if is_granted('ROLE_USER') %}

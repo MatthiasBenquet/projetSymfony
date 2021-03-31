@@ -1,6 +1,28 @@
 easy_admin:
+    site_name: ProStage
+    design:
+        brand_color: '#00D0E0'
+        menu:
+            - { label: 'Accueil', route: 'pro_stage_accueil', icon: 'reply' }
+            - Stage
+            - Formation
+            - Entreprise
+            - User
     entities:
-        - App\Entity\Stage
-        - App\Entity\Formation
-        - App\Entity\Entreprise
-        - App\Entity\User
+        Stage:
+            class: App\Entity\Stage
+            label: 'Stages'
+            list:
+                title: 'Lister %%entity_label%%'
+            show:
+                title: 'Stage n° #%%entity_id%%'
+            edit:
+                title: 'Modifier %%entity_id%%'
+            new:
+                title: 'Ajouter %%entity_label%%'
+        Formation:
+            class: App\Entity\Formation
+        Entreprise:
+            class: App\Entity\Entreprise
+        User:
+            class: App\Entity\User

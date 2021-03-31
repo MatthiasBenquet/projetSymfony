@@ -31,16 +31,29 @@ class FormationController extends AbstractController
      */
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
+
         $formation = new Formation();
+
+
         $form = $this->createForm(FormationType::class, $formation);
+
+
+
+
+
+
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $manager->persist($formation);
             $manager->flush();
 
             return $this->redirectToRoute('formation_index');
         }
+
+
 
         return $this->render('formation/new.html.twig', [
             'formation' => $formation,
