@@ -1,13 +1,21 @@
 easy_admin:
     site_name: ProStage
     design:
-        brand_color: '#00D0E0'
+        brand_color: '#07D7C7'
         menu:
-            - { label: 'Accueil', route: 'pro_stage_accueil', icon: 'reply' }
-            - Stage
-            - Formation
-            - Entreprise
-            - User
+            - label: 'Accueil'
+              icon: 'reply'
+              children:
+                  - { label: 'Accueil ProStage', route: 'pro_stage_accueil' }
+                  - { label: 'Site de l''IUT', url: 'https://www.iutbayonne.univ-pau.fr/' }
+            - { entity: 'Stage', icon: 'star'}
+            - { entity: 'Formation', icon: 'graduation-cap'}
+            - { entity: 'Entreprise', icon: 'building'}
+            - { entity: 'User', icon: 'user'}
+    formats:
+        date: 'd/m/Y'
+    list:
+        collapse-actions: true
     entities:
         Stage:
             class: App\Entity\Stage
@@ -22,7 +30,35 @@ easy_admin:
                 title: 'Ajouter %%entity_label%%'
         Formation:
             class: App\Entity\Formation
+            label: 'Formations'
+            list:
+                title: 'Lister %%entity_label%%'
+            show:
+                title: 'Formation n° #%%entity_id%%'
+            edit:
+                title: 'Modifier %%entity_id%%'
+            new:
+                title: 'Ajouter %%entity_label%%'
+
         Entreprise:
             class: App\Entity\Entreprise
+            label: 'Entreprises'
+            list:
+                title: 'Lister %%entity_label%%'
+            show:
+                title: 'Entreprise n° #%%entity_id%%'
+            edit:
+                title: 'Modifier %%entity_id%%'
+            new:
+                title: 'Ajouter %%entity_label%%'
         User:
             class: App\Entity\User
+            label: 'Utilisateurs'
+            list:
+                title: 'Lister %%entity_label%%'
+            show:
+                title: 'Utilisateur n° #%%entity_id%%'
+            edit:
+                title: 'Modifier %%entity_id%%'
+            new:
+                title: 'Ajouter %%entity_label%%'
